@@ -1,4 +1,6 @@
 # mongoScraper
+## here is the link on HEROKU https://nameless-shore-99051.herokuapp.com/
+
 ## All the News That's Fit to Scrape
 ### Overview
 
