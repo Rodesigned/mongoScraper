@@ -2,7 +2,7 @@
 // ===============
 
 // Create function to make a formatted date for our scraped data
-var makeDate = function() {
+var makeDate = function () {
   // Save the current date to d
   var d = new Date();
   // Prepare an empty string for our formatted state

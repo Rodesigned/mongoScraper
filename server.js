@@ -25,7 +25,7 @@ app.set("view engine", "handlebars");
 
 // Use body parser in our app
 app.use(bodyParser.urlencoded({
-   extended: false
+  extended: false
 }));
 
 // Use body parser with our app
@@ -34,19 +34,17 @@ app.use(router);
 // If deployed, use the deployed database
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadLines";
 
-mongoose.connect(db,function(error){
-  if (error){
+mongoose.connect(db, function (error) {
+  if (error) {
     console.log(error);
   }
-else {
-  console.log("mongoose connection is successful");
-}
+  else {
+    console.log("mongoose connection is successful");
+  }
 });
 
 
 //Listen on the port localhost
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("Listening on port " + PORT);
 });
-
-

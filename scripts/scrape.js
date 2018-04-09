@@ -6,9 +6,9 @@ var cheerio = require("cheerio");
 
 // This function will scrape the BBC website 
 // body is the actual HTML on the page. Load this into cheerio
-var scrape = function(cb) {
-    request("http://www.bbc.com/", function(err, res, body) {
-    
+var scrape = function (cb) {
+  request("http://www.bbc.com/", function (err, res, body) {
+
 
     // Use cheerio to manipulate and traverse our html page
     var $ = cheerio.load(body);
@@ -18,9 +18,9 @@ var scrape = function(cb) {
 
     // Loop through each element that has the "media__content"
     // In each .media-content, we grab the child with the class media-title
-    $(".media__content").each(function(i, element) {
-      
-    // This is the article headline - media__title
+    $(".media__content").each(function (i, element) {
+
+      // This is the article headline - media__title
       var head = $(this).children(".media__title").text().trim();
 
       // Grab the URL of the article

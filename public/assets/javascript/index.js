@@ -1,5 +1,5 @@
 /* gloabl bootbox */
-$(document).ready(function() {
+$(document).ready(function () {
   // Setting a reference to the article-container div where all the dynamic content will go
   // Adding event listeners to any dynamically generated "save article"
   // and "scrape new article" buttons
@@ -13,7 +13,7 @@ $(document).ready(function() {
   function initPage() {
     // Empty the article container, run an AJAX request for any unsaved headlines
     articleContainer.empty();
-    $.get("/api/headlines?saved=false").then(function(data) {
+    $.get("/api/headlines?saved=false").then(function (data) {
       // If we have headlines, render them to the page
       if (data && data.length) {
         renderArticles(data);
@@ -103,7 +103,7 @@ $(document).ready(function() {
       method: "PUT",
       url: "/api/headlines",
       data: articleToSave
-    }).then(function(data) {
+    }).then(function (data) {
       // If successful, mongoose will send back an object containing a key of "ok" with the value of 1
       // (which casts to 'true')
       if (data.ok) {
@@ -115,7 +115,7 @@ $(document).ready(function() {
 
   function handleArticleScrape() {
     // This function handles the user clicking any "scrape new article" buttons
-    $.get("/api/fetch").then(function(data) {
+    $.get("/api/fetch").then(function (data) {
       // If we are able to succesfully scrape the BBC News and compare the articles to those
       // already in our collection, re render the articles on the page
       // and let the user know how many unique articles we were able to save

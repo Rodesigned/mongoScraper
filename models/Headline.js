@@ -19,7 +19,7 @@ var headlineSchema = new Schema({
     type: String,
     required: true
   },
-  
+
   // date is just a string
   date: String,
   saved: {
