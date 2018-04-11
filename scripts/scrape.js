@@ -1,40 +1,43 @@
 // scrape script
+// =============
 
-// Require request and cheerio to our scrapes possible
+// Require request and cheerio, making our scrapes possible
 var request = require("request");
 var cheerio = require("cheerio");
 
-// This function will scrape the BBC website 
-// body is the actual HTML on the page. Load this into cheerio
-var scrape = function (cb) {
-  request("http://www.bbc.com/", function (err, res, body) {
+// This function will scrape the NYTimes website (cb is our callback)
+var scrape = function(cb) {
+  // Use the request package to take in the body of the page's html
+  request("http://www.nytimes.com", function(err, res, body) {
+    // body is the actual HTML on the page. Load this into cheerio
 
-
-    // Use cheerio to manipulate and traverse our html page
+    // Saving this to $ creates a virtual HTML page we can minipulate and
+    // traverse with the same methods we'd use in jQuery
     var $ = cheerio.load(body);
 
-    // Make an empty array to save our articles
+    // Make an empty array to save our article info
     var articles = [];
 
-    // Loop through each element that has the "media__content"
-    // In each .media-content, we grab the child with the class media-title
-    $(".media__content").each(function (i, element) {
+    // Now, find and loop through each element that has the "theme-summary" class
+    // (i.e, the section holding the articles)
+    $(".theme-summary").each(function(i, element) {
+      // In each .theme-summary, we grab the child with the class story-heading
 
-      // This is the article headline - media__title
-      var head = $(this).children(".media__title").text().trim();
+      // Then we grab the inner text of the this element and store it
+      // to the head variable. This is the article headline
+      var head = $(this).children(".story-heading").text().trim();
 
       // Grab the URL of the article
-      var url = $(this).children(".media__link").children("a").attr("href");
+      var url = $(this).children(".story-heading").children("a").attr("href");
 
-      // Then we grab any children with the class of media-summary
-      // We store this to the sum variable for the media-summaries
-      var sum = $(this).children(".media__summary").text().trim();
+      // Then we grab any children with the class of summary and then grab it's inner text
+      // We store this to the sum variable. This is the article summary
+      var sum = $(this).children(".summary").text().trim();
 
-      // If our headline and sum and url aren't empty or undefined, do the following
+      // So long as our headline and sum and url aren't empty or undefined, do the following
       if (head && sum && url) {
         // This section uses regular expressions and the trim function to tidy our headlines and summaries
-
-        // To remove extra lines, extra spacing, extra tabs, etc.. use regx method
+        // We're removing extra lines, extra spacing, extra tabs, etc.. to increase to typographical cleanliness.
         var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
         var sumNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
