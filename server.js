@@ -31,18 +31,6 @@ app.use(bodyParser.urlencoded({
 // Use body parser with our app
 app.use(router);
 
-
-// // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-// // Set mongoose to leverage built in JavaScript ES6 Promises
-// // Connect to the Mongo DB
-// mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI, {
-//   useMongoClient: true
-// });
-
-
 // If deployed, use the deployed database
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadLines";
 
@@ -54,7 +42,6 @@ mongoose.connect(db, function (error) {
     console.log("mongoose connection is successful");
   }
 });
-
 
 //Listen on the port localhost
 app.listen(PORT, function () {
